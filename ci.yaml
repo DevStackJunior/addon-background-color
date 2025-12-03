@@ -1,0 +1,35 @@
+name: learn-github-actions
+run-name: ${{ github.actor }} is learning GitHub Actions
+on: 
+  push:
+  pull_request:
+  
+jobs:
+  deploy-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22.14
+
+      - name: Init Node
+        uses: npm install
+
+      - name: Build Extension
+        uses: npm run build
+
+      - name: Plugin Package Artifact Firefox
+        uses: actions/upload-artifact@v5
+        with:
+          name: firefox-extension
+          path: .output/firefox-mv2
+
+      - name: Plugin Package Artifact Chrome
+        uses: actions/upload-artifact@v5
+        with:
+          name: chrome-extension
+          path: .output/chrome-mv3
