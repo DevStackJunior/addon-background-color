@@ -28,10 +28,10 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: firefox-extension
-          path: .output/firefox-mv2
+          path: .output\firefox-mv2
 
       - name: Plugin Package Artifact Chrome
         uses: actions/upload-artifact@v5
         with:
           name: chrome-extension
-          path: .output/chrome-mv3
+          path: .output\chrome-mv3
