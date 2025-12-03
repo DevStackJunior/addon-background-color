@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v5
         with:
-          node-version: 22.14
+          node-version: 20
 
       - name: Init Node
         run: npm install
