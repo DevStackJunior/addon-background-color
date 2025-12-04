@@ -1,9 +1,15 @@
 name: learn-github-actions
-run-name: ${{ github.actor }} is learning GitHub Actions
-on: [push, pull]
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, reopened, synchronize]
+
 jobs:
   deploy-package:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
@@ -11,22 +17,27 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v5
         with:
-          node-version: 22.14
+          node-version: 20
 
-      - name: Init Node
-        uses: npm install
+      - name: Install dependencies
+        run: npm install
 
       - name: Build Extension
-        uses: npm run build
+        run: npm run build
 
-      - name: Plugin Package Artifact Firefox
+      - name: Debug output
+        run: ls -R .
+
+      - name: Upload Firefox artifact
         uses: actions/upload-artifact@v5
         with:
           name: firefox-extension
           path: .output/firefox-mv2
+          if-no-files-found: warn
 
-      - name: Plugin Package Artifact Chrome
+      - name: Upload Chrome artifact
         uses: actions/upload-artifact@v5
         with:
           name: chrome-extension
           path: .output/chrome-mv3
+          if-no-files-found: warn
