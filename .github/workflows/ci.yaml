@@ -22,8 +22,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build Extension
-        run: npm run build
+      - name: Build Firefox Package
+        run: npm run build:firefox
+
+      - name: Build Chrome Package
+        run: npm run build:chrome
 
       - name: Debug output
         run: ls -R .
