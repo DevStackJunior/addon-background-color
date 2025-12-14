@@ -9,8 +9,18 @@ jobs:
     name: CI training
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
       - name: Init static version of Node Modules from package-lock.json
-        run: npm install
+        run: npm ci
       - name: Check-Up Node Modules
         run: npm audit --audit-level=critical
       - name: ESLint
