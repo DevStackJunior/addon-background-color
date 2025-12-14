@@ -22,7 +22,7 @@ jobs:
       - name: Init static version of Node Modules from package-lock.json
         run: npm ci
       - name: Check-Up Node Modules
-        run: npm audit --audit-level=critical
+        run: npm audit --audit-level=high
       - name: ESLint
         run: npm run lint:check
       - name: TS Compilation
