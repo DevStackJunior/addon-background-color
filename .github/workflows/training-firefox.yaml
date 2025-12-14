@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Init static version of Node Modules from package-lock.json
-        run: npm ci
+        run: npm install
       - name: Check-Up Node Modules
         run: npm audit --audit-level=critical
       - name: ESLint
