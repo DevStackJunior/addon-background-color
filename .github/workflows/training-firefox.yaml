@@ -1,0 +1,21 @@
+name: training_One
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  ci-training:
+    name: CI training
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check-Up Node Modules
+        run: npm audit
+      - name: Init static version of Node Modules from package-lock.json
+        run: npm ci
+      - name: ESLint
+        run: npm run lint:check
+      - name: TS Compilation
+        run: npm run compile
+      - name:
+        run: npm run build:firefox
